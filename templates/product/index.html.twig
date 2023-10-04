@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper {color:green}
+</style>
+
+<p>It's id: {{post}}<p>
+    <p> {{"now"|date}}<p>
+
+<p>It's names my folower: <p>
+    <ul>
+        {% for numb in number %}
+        <li>{{ numb|upper }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
