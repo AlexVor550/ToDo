@@ -25,41 +25,64 @@ class TaskType extends AbstractType
                 'label' => 'Имя:',
                 'attr' => [
                     'placeholder' => 'Введите ваше имя',
-                    'class' => 'form-control', // Добавьте класс Bootstrap 'form-control'
+                    'class' => 'form-control', 
                 ],
-                // ... остальные параметры
+                'constraints' => [
+                    new Length(
+                        min: 4,
+                        max: 20,
+                        minMessage: 'Your name must be at least {{ limit }} characters long',
+                        maxMessage: 'Your name cannot be longer than {{ limit }} characters'
+                    ),
+                    new \Symfony\Component\Validator\Constraints\Regex(
+                        pattern: "/[A-Za-z]*/",
+                        message: 'Your name cannot contain a number'
+
+                    ),
+                    new NotBlank(
+                        message: 'Name cannot be blank'
+                    )
+                ]
+                
             ])
             ->add('description', TextType::class, [
                 'label' => 'Описание:',
                 'attr' => [
                     'placeholder' => 'Введите описание',
-                    'class' => 'form-control', // Добавьте класс Bootstrap 'form-control'
-                ],
-                // ... остальные параметры
+                    'class' => 'form-control',
+                ],'constraints' => [
+                    new Length(
+                        min: 5,
+                        max: 100,
+                        minMessage: 'Your name must be at least {{ limit }} characters long',
+                        maxMessage: 'Your name cannot be longer than {{ limit }} characters'
+                    )
+                ]
+                
             ])
             ->add('data', DateType::class, [
                 'placeholder' => [
-                    'year' => '2023', 'month' => 'Сентябрь', 'day' => '31',
+                    'year' => '2023', 'month' => 'Сентябрь', 'day' => '30',
                 ],
-                // ... остальные параметры
+                
             ])
             ->add('createdAt', DateTimeType::class, [
                 'date_label' => 'Начинается:',
-                // ... остальные параметры
+                
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Выберите категорию',
                 'attr' => [
-                    'class' => 'form-control', // Добавьте класс Bootstrap 'form-control'
+                    'class' => 'form-control', 
                 ],
-                // ... остальные параметры
+                
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Сохранить',
                 'attr' => [
-                    'class' => 'btn btn-primary', // Добавьте класс Bootstrap 'btn btn-primary'
+                    'class' => 'btn btn-primary', 
                 ],
             ]);
     }
